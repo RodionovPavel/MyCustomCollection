@@ -16,34 +16,41 @@ public class SimpleListImpl<T> implements SimpleList<T> {
         list = new Object[DEFAULT_CAPACITY];
     }
 
+    @Override
     public void add(T item) {
         if (count == list.length)
-            growArray();
+            growArray(0);
         list[count] = item;
         count++;
     }
 
-    private void growArray() {
-        Object[] newArray = new Object[list.length * 2];
+    private void growArray(int capacity) {
+        Object[] newArray = new Object[list.length * 2 + capacity];
         System.arraycopy(list, 0, newArray, 0, count - 1);
         list = newArray;
     }
 
     @Override
     public void insert(int index, T item) throws Exception {
+        if (index < 0 || index > count - 1) {
+            throw new IllegalArgumentException();
+        }
         list[index] = item;
     }
 
     @Override
     public void remove(int index) throws Exception {
+        if (isEmpty() || index > count - 1) {
+            throw new IllegalArgumentException();
+        }
         System.arraycopy(list, index + 1, list, index, count - index - 1);
         list[index + 1] = null;
         count--;
     }
 
     @Override
-    public Optional<T> get(int index) {
-        return Optional.ofNullable((T) list[index]);
+    public Object get(int index) {
+        return list[index];
     }
 
     @Override
@@ -53,9 +60,11 @@ public class SimpleListImpl<T> implements SimpleList<T> {
 
     @Override
     public void addAll(SimpleList<T> newList) {
-//      Нужно ли увеличивать размер, если новый лист больше, чем вместимость? И в случае addAll список должен полностью подменяться или добавлять значения в конец списка?
+        if (newList.size() > count) {
+            growArray(newList.size());
+        }
         for (int i = 0; i < newList.size(); i++) {
-            list[i] = newList.get(i);
+            list[i + count - 1] = newList.get(i);
         }
     }
 

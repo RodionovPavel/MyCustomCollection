@@ -6,32 +6,48 @@ import java.util.Comparator;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        SimpleList<String> list4 = new SimpleListImpl<>();
-        SimpleList<Integer> list3 = new SimpleListImpl<>();
+        SimpleList<String> listStringFirst = new SimpleListImpl<>();
+        SimpleList<String> listStringSecond = new SimpleListImpl<>();
+        SimpleList<Integer> listInt = new SimpleListImpl<>();
 
-        list3.add(4);
-        list3.add(5);
-        list3.add(1);
+        listInt.add(4);
+        listInt.add(5);
+        listInt.add(1);
 
-        list4.add("A");
-        list4.add("C");
-        list4.add("Ac");
-        list4.add("C");
-        list4.add("Ab");
-        list4.add("C");
+        listStringFirst.add("A");
+        listStringFirst.add("C");
+        listStringFirst.add("Ac");
+        listStringFirst.add("C");
+        listStringFirst.add("Ab");
+        listStringFirst.add("C");
+
+
+
 
         System.out.println("Original list:");
-        System.out.println(list3);
-        System.out.println(list4);
+        System.out.println(listInt);
+        System.out.println(listStringFirst);
         System.out.println("List after shuffle:");
-        System.out.println(list3.shuffle());
-        System.out.println(list4.shuffle());
+        System.out.println(listInt.shuffle());
+        System.out.println(listStringFirst.shuffle());
 
         System.out.println("List after sort:");
-        System.out.println(list3.sort(new GenericComparator<>()));
-        System.out.println(list4.sort(new GenericComparator<>()));
+        System.out.println(listInt.sort(new GenericComparator<>()));
+        System.out.println(listStringFirst.sort(new GenericComparator<>()));
 
-        System.out.println(list4.first("C"));
-        System.out.println(list4.last("C"));
+        System.out.println(listStringFirst.first("PPP"));
+        System.out.println(listStringFirst.last("C"));
+
+        listStringSecond.add("1");
+        listStringSecond.add("2");
+        listStringSecond.add("3");
+        listStringSecond.add("3");
+        listStringSecond.add("3");
+        listStringSecond.add("3");
+        listStringSecond.add("3");
+        listStringSecond.add("3");
+
+        listStringFirst.addAll(listStringSecond);
+        System.out.println(listStringFirst);
     }
 }
