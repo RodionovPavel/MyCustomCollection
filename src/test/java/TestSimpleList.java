@@ -37,7 +37,7 @@ public class TestSimpleList {
     @Test
     public void testInsert() throws Exception {
         listStrings.insert(3, "O");
-        assertEquals("O", listStrings.get(3));
+        assertEquals("O", listStrings.get(3).get());
     }
 
     @Test
@@ -48,7 +48,7 @@ public class TestSimpleList {
 
     @Test
     public void testGet() {
-        assertEquals("A", listStrings.get(0));
+        assertEquals("A", listStrings.get(0).get());
     }
 
     @Test
@@ -89,7 +89,7 @@ public class TestSimpleList {
     @Test
     public void testIsEmpty() throws Exception {
 
-        while (listStrings.get(0) != null) {
+        while (listStrings.get(0).isPresent()) {
             listStrings.remove(0);
         }
 
@@ -99,6 +99,19 @@ public class TestSimpleList {
     @Test
     public void testSort() {
         SimpleList<String> simpleList = listStrings.sort(new GenericComparator<>());
-        assertEquals("Ab", simpleList.get(1));
+        assertEquals("Ab", simpleList.get(1).get());
+    }
+
+    @Test
+    public void testShuffle() throws Exception {
+        SimpleList<String> simpleList = listStrings.shuffle();
+        boolean isShuffle = false;
+            for (int i = 0; i < listStrings.size(); i++) {
+                if (listStrings.get(i).get().equals(simpleList.get(i).get())) {
+                    isShuffle = true;
+                }
+            }
+
+        assertEquals(true, isShuffle);
     }
 }

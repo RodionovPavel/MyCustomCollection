@@ -1,6 +1,7 @@
 package service;
 
 import java.util.Comparator;
+import java.util.Optional;
 
 public interface SimpleList<T> {
     void add(T item);
@@ -9,7 +10,7 @@ public interface SimpleList<T> {
 
     void remove(int index) throws Exception;
 
-    Object get(int index);
+    Optional<T> get(int index);
 
     int size();
 

@@ -68,11 +68,8 @@ public class SimpleListImpl<T> implements SimpleList<T> {
     }
 
     @Override
-//    public Optional<T> get(int index) {
-//        return Optional.ofNullable((T) list[index]);
-//    }
-    public Object get(int index) {
-        return list[index];
+    public Optional<T> get(int index) {
+        return Optional.ofNullable((T) list[index]);
     }
 
     @Override
@@ -86,7 +83,7 @@ public class SimpleListImpl<T> implements SimpleList<T> {
             growArray(newList.size());
         }
         for (int i = 0; i < newList.size(); i++) {
-            list[i + size] = newList.get(i);
+            list[i + size] = newList.get(i).get();
         }
         size += newList.size();
     }
